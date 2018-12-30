@@ -39,3 +39,4 @@ while checkCoins == "Y":
     file.close()
 
     checkCoins = input("Check again?: Y/N ")
+
