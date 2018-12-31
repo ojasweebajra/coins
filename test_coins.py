@@ -1,7 +1,9 @@
 import sys
 
+
 def main():
     menu()
+
 
 def menu():
     print("Welcome to Coin Count. What would you like to do? ")
@@ -21,75 +23,74 @@ def menu():
 
 
 def volunteers():
-    volunteersFile = open("volunteers.txt", "w+")
-    vFound = False
-    for row in volunteersFile:
-        volunteerInfo = row.split(",")
-        print("Name: ", volunteerInfo[0])
-
+    volunteersfile = open("volunteers.txt", "w+")
+    vfound = False
+    for row in volunteersfile:
+        volunteerinfo = row.split(",")
+        print("Name: ", volunteerinfo[0])
 
 
 def display():
     # Add code to display volunteers details
     print(".")
 
-def check(coinType):
+
+def check(cointype):
     file = open("coin_stuff.txt", "r")
-    cFound = False
+    cfound = False
     for line in file:
         details = line.split(",")
-        if details[0] == coinType:
-            cFound = True
-            coinWeight = float(details[1])
-            coinsNeeded = details[2]
+        if details[0] == cointype:
+            cfound = True
+            coinweight = float(details[1])
+            coinsneeded = details[2]
 
-    if cFound == False:
+    if cfound == False:
         print("Coin not found.")
+        coins()
     else:
-        return coinWeight, coinsNeeded
-
+        return coinweight, coinsneeded
 
 
 def accuracy(weight, coinweight):
-    numBags = weight/coinWeight
-    print(numBags)
+    weight = float(weight)
+    coinweight = float(coinweight)
+    numbags = weight/coinweight
+    print(numbags)
 
-    if numBags.is_integer():
+    if numbags.is_integer():
         accurate = True
         print("Accurate")
     else:
         accurate = False
         print("Not accurate")
         # Add how many more needed to fill a bag
-        numBags = int(numBags)
-        print(numBags)
+        numbags = int(numbags)
+        print(numbags)
 
-    return numBags
+    return numbags
 
 
 def coins():
 
-    checkCoins = "Y"
+    name = input("Name: ")
+    cointype = input("Coin type: £")
+    weight = float(input("Weight: "))
 
-    while checkCoins == "Y":
-        name = input("Name: ")
-        coinType = input("Coin type: £")
-        weight = float(input("Weight: "))
-        coinWeight = " "
-        coinsNeeded = " "
+    new_weight, new_cn = check(cointype)
+    print("Coin weight:", new_weight)
+    print("Coins needed: ", new_cn)
+    numbags = accuracy(weight, new_weight)
 
-        check(coinType)
-        accuracy(weight, coinWeight)
-        print("Coin type: ", coinType, "Weight: ", coinWeight, "Coins needed to fill a bag: ", coinsNeeded)
+    print("Coin type: ", cointype, "Weight: ", new_weight, "Coins needed to fill a bag: ", new_cn)
 
-
-
-
-
-    file.close()
-
-    checkCoins = input("Check again?: Y/N ")
+    checkcoins = input("Check again?: Y/N ")
+    if checkcoins == "Y":
+        coins()
+    else:
+        menu()
 
 
 # Program begins here:
 main()
+
