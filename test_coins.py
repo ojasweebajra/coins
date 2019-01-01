@@ -22,13 +22,24 @@ def menu():
         menu()
 
 
-def volunteers():
-    volunteersfile = open("volunteers.txt", "w+")
+def volunteers(name,numbags):
+    volunteersfile = open("volunteers.txt", "r+")
     vfound = False
+    writefile = open("volunteersupdate.txt", "a")
     for row in volunteersfile:
         volunteerinfo = row.split(",")
-        print("Name: ", volunteerinfo[0])
+        print(row)
+        if name == volunteerinfo[0]:
+            vFound = True
+            writefile.write(name,",",numbags)
 
+    if vfound == False:
+        writefile.write(name,",",numbags)
+
+    volunteersfile.close()
+    writefile.close()
+    os.remove("volunteers.txt")
+    os.rename("volunteersupdate.txt","volunteers.txt")
 
 def display():
     # Add code to display volunteers details
